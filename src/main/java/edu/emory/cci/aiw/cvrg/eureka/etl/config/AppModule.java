@@ -99,6 +99,7 @@ public class AppModule extends AbstractModule {
         bind(new TypeLiteral<UserDao<? extends UserEntity<? extends RoleEntity>>>() {}).to(JpaEtlUserDao.class);
         bind(new TypeLiteral<RoleDao<AuthorizedRoleEntity>>() {}).to(JpaRoleDao.class);
         bind(new TypeLiteral<UserTemplateDao<AuthorizedRoleEntity, UserTemplateEntity>>() {}).to(JpaUserTemplateDao.class);
+        bind(new TypeLiteral<UserTemplateDao<? extends RoleEntity,? extends org.eurekaclinical.standardapis.entity.UserTemplateEntity<? extends RoleEntity >>>() {}).to(JpaUserTemplateDao.class);
         bind(JobDao.class).to(JpaJobDao.class);
         bind(JobEventDao.class).to(JpaJobEventDao.class);
         bind(EtlGroupDao.class).to(JpaEtlGroupDao.class);
