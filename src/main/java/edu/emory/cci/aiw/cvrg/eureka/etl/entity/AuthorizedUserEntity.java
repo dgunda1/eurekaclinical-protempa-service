@@ -55,7 +55,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.eurekaclinical.standardapis.entity.UserEntity;
+import org.eurekaclinical.standardapis.entity.AbstractUserEntity;
 
 /**
  * A bean class to hold information about users in the system.
@@ -65,7 +65,7 @@ import org.eurekaclinical.standardapis.entity.UserEntity;
  */
 @Entity
 @Table(name = "users")
-public class AuthorizedUserEntity implements UserEntity<AuthorizedRoleEntity> {
+public class AuthorizedUserEntity extends AbstractUserEntity<AuthorizedRoleEntity> {
 
     /**
      * The user's unique identifier.

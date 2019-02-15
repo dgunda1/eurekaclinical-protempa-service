@@ -77,21 +77,23 @@ import edu.emory.cci.aiw.cvrg.eureka.etl.dao.ProtempaServiceRoleDao;
 import edu.emory.cci.aiw.cvrg.eureka.etl.entity.AuthorizedRoleEntity;
 import edu.emory.cci.aiw.cvrg.eureka.etl.entity.AuthorizedUserEntity;
 import edu.emory.cci.aiw.cvrg.eureka.etl.entity.UserTemplateEntity;
+import org.eurekaclinical.common.config.AbstractAppModule;
 import org.eurekaclinical.standardapis.dao.RoleDao;
 import org.eurekaclinical.standardapis.dao.UserDao;
 import org.eurekaclinical.standardapis.dao.UserTemplateDao;
 import org.eurekaclinical.standardapis.entity.RoleEntity;
 import org.eurekaclinical.standardapis.entity.UserEntity;
 import org.eurekaclinical.phenotype.client.EurekaClinicalPhenotypeClient;
-
+import org.eurekaclinical.common.config.AbstractAppModule;
 /**
  *
  * @author hrathod
  */
-public class AppTestModule extends AbstractModule {
+public class AppTestModule extends AbstractAppModule {
     PhenotypeClientProvider phenotypeClientProvider;
     public AppTestModule(){
-        EtlProperties etlProperties = new EtlProperties();
+    	super(JpaEtlUserDao.class, JpaUserTemplateDao.class);
+    	EtlProperties etlProperties = new EtlProperties();
         phenotypeClientProvider = new PhenotypeClientProvider(etlProperties.getPhenotypeServiceUrl());
         
     }
@@ -115,8 +117,8 @@ public class AppTestModule extends AbstractModule {
         bind(IdPoolIdDao.class).to(JpaIdPoolIdDao.class);
         bind(new TypeLiteral<RoleDao<AuthorizedRoleEntity>>() {}).to(JpaRoleDao.class);
         bind(new TypeLiteral<UserTemplateDao<AuthorizedRoleEntity, UserTemplateEntity>>() {}).to(JpaUserTemplateDao.class);
-        bind(new TypeLiteral<UserDao<AuthorizedUserEntity>>() {}).to(JpaEtlUserDao.class);
-        bind(new TypeLiteral<UserDao<? extends UserEntity<? extends RoleEntity>>>() {}).to(JpaEtlUserDao.class);
+        bind(new TypeLiteral<UserDao<AuthorizedRoleEntity,AuthorizedUserEntity>>() {}).to(JpaEtlUserDao.class);
+      //  bind(new TypeLiteral<UserDao<? extends UserEntity<? extends RoleEntity>>>() {}).to(JpaEtlUserDao.class);
         bind(EurekaClinicalPhenotypeClient.class).toProvider(this.phenotypeClientProvider);
     }
 }

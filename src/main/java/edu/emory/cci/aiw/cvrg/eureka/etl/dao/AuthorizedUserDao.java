@@ -41,6 +41,7 @@ package edu.emory.cci.aiw.cvrg.eureka.etl.dao;
  */
 
 import edu.emory.cci.aiw.cvrg.eureka.etl.entity.AuthorizedUserEntity;
+import edu.emory.cci.aiw.cvrg.eureka.etl.entity.AuthorizedRoleEntity;
 import org.eurekaclinical.standardapis.dao.UserDao;
 
 /**
@@ -50,6 +51,6 @@ import org.eurekaclinical.standardapis.dao.UserDao;
  * @author hrathod
  *
  */
-public interface AuthorizedUserDao extends UserDao<AuthorizedUserEntity> {
+public interface AuthorizedUserDao extends UserDao<AuthorizedRoleEntity,AuthorizedUserEntity> {
 	
 }
